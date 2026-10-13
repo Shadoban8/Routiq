@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="ROUTIQ is a daily routine and habit tracker that helps you see what to do right now.">
+  <title>ROUTIQ</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232563eb'/%3E%3Cpath d='M9 21.5 14 16l3.5 3.5L23 11' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></symbol>
+      <symbol id="i-routine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+      <symbol id="i-habits" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+      <symbol id="i-focus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4"/><path d="m12 14 3-3"/><circle cx="12" cy="14" r="8"/></symbol>
+      <symbol id="i-progress" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 4v16l14-8z"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="app">
+    <!-- Mobile top bar -->
+    <header class="topbar">
+      <button type="button" class="topbar__menu" id="menu-button" data-action="open-nav" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
+      </button>
+      <span class="brand brand--small">
+        <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2563eb"/><path d="M9 21.5 14 16l3.5 3.5L23 11" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="23" cy="11" r="2" fill="#fff"/></svg>
+        <span class="brand__name">ROUTIQ</span>
+      </span>
+      <button type="button" class="topbar__add" data-action="open-task-form" aria-label="Add task">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg>
+      </button>
+    </header>
+
+    <div class="scrim" id="scrim" data-action="close-nav" hidden></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar">
+      <div class="sidebar__head">
+        <span class="brand">
+          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2563eb"/><path d="M9 21.5 14 16l3.5 3.5L23 11" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="23" cy="11" r="2" fill="#fff"/></svg>
+          <span class="brand__name">ROUTIQ</span>
+        </span>
+        <button type="button" class="sidebar__close" data-action="close-nav" aria-label="Close navigation">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+
+      <nav aria-label="Primary">
+        <ul class="nav">
+          <li><a class="nav__link" href="#dashboard" data-view="dashboard"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-dashboard"></use></svg>Dashboard</a></li>
+          <li><a class="nav__link" href="#routine" data-view="routine"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-routine"></use></svg>My Routine</a></li>
+          <li><a class="nav__link" href="#habits" data-view="habits"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-habits"></use></svg>My Habits</a></li>
+          <li><a class="nav__link" href="#focus" data-view="focus"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-focus"></use></svg>Focus Mode</a></li>
+          <li><a class="nav__link" href="#progress" data-view="progress"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-progress"></use></svg>Progress</a></li>
+          <li><a class="nav__link" href="#settings" data-view="settings"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg>Settings</a></li>
+        </ul>
+      </nav>
+
+      <p class="sidebar__note">Your data is saved in this browser only.</p>
+    </aside>
+
+    <main class="main" id="main">
+      <div class="main__inner">
+
+        <!-- DASHBOARD -->
+        <section class="view" id="view-dashboard" data-view="dashboard" aria-labelledby="greeting">
+          <header class="page-header">
+            <div class="page-header__text">
+              <p class="eyebrow" id="today-label"></p>
+              <h1 id="greeting" tabindex="-1">Hello</h1>
+              <p class="page-sub" id="dashboard-summary"></p>
+            </div>
+            <div class="page-header__actions">
+              <div class="progress-pill">
+                <div class="bar" id="header-bar" role="progressbar" aria-label="Today's completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+                <span class="progress-pill__text" id="header-progress-text"></span>
+              </div>
+              <button type="button" class="btn btn--primary" data-action="open-task-form">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg>Add task
+              </button>
+            </div>
+          </header>
+
+          <section class="stats" aria-label="Daily overview">
+            <article class="stat">
+              <p class="stat__label">Scheduled</p>
+              <p class="stat__value" id="stat-total">0</p>
+            </article>
+            <article class="stat">
+              <p class="stat__label">Completed</p>
+              <p class="stat__value" id="stat-done">0</p>
+            </article>
+            <article class="stat">
+              <p class="stat__label">Remaining</p>
+              <p class="stat__value" id="stat-remaining">0</p>
+            </article>
+            <article class="stat">
+              <p class="stat__label">Completion</p>
+              <p class="stat__value" id="stat-percent">0%</p>
+              <div class="bar bar--thin" id="stat-bar" role="progressbar" aria-label="Daily completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+            </article>
+          </section>
+
+          <div class="dash-grid">
+            <div class="dash-grid__main">
+              <section class="next-card" id="next-task" aria-labelledby="next-heading"></section>
+
+              <section class="card" aria-labelledby="schedule-heading">
+                <div class="card__head">
+                  <h2 id="schedule-heading">Today's schedule</h2>
+                  <a class="link" href="#routine">View routine</a>
+                </div>
+                <div id="dashboard-schedule"></div>
+              </section>
+            </div>
+
+            <aside class="dash-grid__side">
+              <section class="card" aria-labelledby="dash-habits-heading">
+                <div class="card__head">
+                  <h2 id="dash-habits-heading">Habits today</h2>
+                  <a class="link" href="#habits">Manage</a>
+                </div>
+                <div id="dashboard-habits"></div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <!-- ROUTINE -->
+        <section class="view" id="view-routine" data-view="routine" aria-labelledby="routine-title" hidden>
+          <header class="page-header">
+            <div class="page-header__text">
+              <p class="eyebrow">Plan your day</p>
+              <h1 id="routine-title" tabindex="-1">My Routine</h1>
+              <p class="page-sub" id="routine-summary"></p>
+            </div>
+            <div class="page-header__actions">
+              <button type="button" class="btn btn--primary" data-action="open-task-form">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg>Add task
+              </button>
+            </div>
+          </header>
+
+          <div class="date-nav" role="group" aria-label="Choose a day">
+            <button type="button" class="icon-btn icon-btn--bordered" data-action="routine-prev" aria-label="Previous day">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron-left"></use></svg>
+            </button>
+            <div class="date-nav__field">
+              <label class="sr-only" for="routine-date">Date</label>
+              <input type="date" id="routine-date">
+            </div>
+            <button type="button" class="icon-btn icon-btn--bordered" data-action="routine-next" aria-label="Next day">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron-right"></use></svg>
+            </button>
+            <button type="button" class="btn btn--secondary" data-action="routine-today">Today</button>
+            <p class="date-nav__label" id="routine-date-label"></p>
+          </div>
+
+          <section class="card" aria-label="Schedule for the selected day">
+            <div id="routine-list"></div>
+          </section>
+        </section>
+
+        <!-- HABITS -->
+        <section class="view" id="view-habits" data-view="habits" aria-labelledby="habits-title" hidden>
+          <header class="page-header">
+            <div class="page-header__text">
+              <p class="eyebrow">Build consistency</p>
+              <h1 id="habits-title" tabindex="-1">My Habits</h1>
+              <p class="page-sub" id="habits-summary"></p>
+            </div>
+          </header>
+
+          <section class="card" aria-labelledby="add-habit-heading">
+            <h2 id="add-habit-heading" class="card__title">Add a habit</h2>
+            <form id="habit-form" class="inline-form" novalidate>
+              <div class="field field--grow">
+                <label for="habit-name">Habit name</label>
+                <input type="text" id="habit-name" maxlength="60" autocomplete="off" placeholder="e.g. Drink 2 litres of water" aria-describedby="habit-name-error" required>
+                <p class="field__error" id="habit-name-error"></p>
+              </div>
+              <button type="submit" class="btn btn--primary">
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg>Add habit
+              </button>
+            </form>
+          </section>
+
+          <section class="card" aria-labelledby="habit-list-heading">
+            <h2 id="habit-list-heading" class="card__title">Your habits</h2>
+            <div id="habits-list"></div>
+          </section>
+        </section>
+
+        <!-- FOCUS -->
+        <section class="view" id="view-focus" data-view="focus" aria-labelledby="focus-title" hidden>
+          <header class="page-header">
+            <div class="page-header__text">
+              <p class="eyebrow">Deep work</p>
+              <h1 id="focus-title" tabindex="-1">Focus Mode</h1>
+              <p class="page-sub">Pick a task, set a duration, and work without distractions.</p>
+            </div>
+          </header>
+
+          <div class="focus-layout">
+            <section class="card focus-card" aria-labelledby="focus-task-label">
+              <p class="focus-card__task" id="focus-task-label">Focus session</p>
+              <div class="timer">
+                <svg class="timer__ring" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+                  <circle class="timer__track" cx="100" cy="100" r="88"/>
+                  <circle class="timer__progress" id="timer-ring" cx="100" cy="100" r="88"/>
+                </svg>
+                <div class="timer__readout">
+                  <span class="timer__time" id="timer-display" role="timer" aria-label="Time remaining">25:00</span>
+                  <span class="timer__state" id="timer-state">Ready</span>
+                </div>
+              </div>
+              <div class="focus-card__controls">
+                <button type="button" class="btn btn--primary btn--lg" id="timer-start" data-action="timer-start">
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg><span>Start</span>
+                </button>
+                <button type="button" class="btn btn--primary btn--lg" id="timer-pause" data-action="timer-pause" hidden>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pause"></use></svg>Pause
+                </button>
+                <button type="button" class="btn btn--primary btn--lg" id="timer-resume" data-action="timer-resume" hidden>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>Resume
+                </button>
+                <button type="button" class="btn btn--secondary btn--lg" id="timer-reset" data-action="timer-reset" hidden>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-reset"></use></svg>Reset
+                </button>
+              </div>
+              <div class="focus-card__done" id="focus-complete-wrap" hidden>
+                <p>Session finished. Nice work.</p>
+                <button type="button" class="btn btn--secondary btn--sm" id="focus-complete-task" data-action="timer-complete-task" hidden>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg>Mark task complete
+                </button>
+              </div>
+              <p class="sr-only" id="timer-announce" role="status" aria-live="polite"></p>
+            </section>
+
+            <section class="card" aria-labelledby="focus-setup-heading">
+              <h2 class="card__title" id="focus-setup-heading">Session setup</h2>
+              <fieldset class="plain-fieldset" id="focus-setup">
+                <legend class="sr-only">Focus session settings</legend>
+                <div class="field">
+                  <label for="focus-task">Task</label>
+                  <select id="focus-task"></select>
+                </div>
+                <div class="field">
+                  <label for="focus-duration">Duration (minutes)</label>
+                  <input type="number" id="focus-duration" min="1" max="240" step="1" inputmode="numeric" value="25" aria-describedby="focus-duration-error">
+                  <p class="field__error" id="focus-duration-error"></p>
+                </div>
+                <div class="presets" role="group" aria-label="Quick durations">
+                  <button type="button" class="preset" data-action="focus-preset" data-minutes="15">15 min</button>
+                  <button type="button" class="preset" data-action="focus-preset" data-minutes="25">25 min</button>
+                  <button type="button" class="preset" data-action="focus-preset" data-minutes="45">45 min</button>
+                  <button type="button" class="preset" data-action="focus-preset" data-minutes="60">60 min</button>
+                </div>
+              </fieldset>
+              <p class="hint">Choosing a task fills in its planned duration. You can change it before you start.</p>
+            </section>
+          </div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="view" id="view-progress" data-view="progress" aria-labelledby="progress-title" hidden>
+          <header class="page-header">
+            <div class="page-header__text">
+              <p class="eyebrow">Your numbers</p>
+              <h1 id="progress-title" tabindex="-1">Progress</h1>
+              <p class="page-sub">Calculated from your saved tasks and habits.</p>
+            </div>
+          </header>
+
+          <section class="stats" aria-label="Progress summary">
+            <article class="stat">
+              <p class="stat__label">Completed today</p>
+              <p class="stat__value" id="prog-today">0</p>
+              <p class="stat__sub" id="prog-today-sub"></p>
+            </article>
+            <article class="stat">
+              <p class="stat__label">Today's completion</p>
+              <p class="stat__value" id="prog-percent">0%</p>
+              <div class="bar bar--thin" id="prog-percent-bar" role="progressbar" aria-label="Today's completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+            </article>
+            <article class="stat">
+              <p class="stat__label">Weekly completion</p>
+              <p class="stat__value" id="prog-week">0%</p>
+              <p class="stat__sub" id="prog-week-sub"></p>
+            </article>
+            <article class="stat">
+              <p class="stat__label">Habit consistency</p>
+              <p class="stat__value" id="prog-habits">0%</p>
+              <p class="stat__sub" id="prog-habits-sub"></p>
+            </article>
+          </section>
+
+          <section class="card" aria-labelledby="chart-heading">
+            <div class="card__head">
+              <h2 id="chart-heading">Last 7 days</h2>
+              <ul class="legend" aria-hidden="true">
+                <li><span class="legend__swatch legend__swatch--done"></span>Completed</li>
+                <li><span class="legend__swatch"></span>Scheduled</li>
+              </ul>
+            </div>
+            <div id="week-chart"></div>
+          </section>
+
+          <section class="card" aria-labelledby="consistency-heading">
+            <h2 class="card__title" id="consistency-heading">Habit consistency</h2>
+            <div id="habit-consistency"></div>
+          </section>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="view" id="view-settings" data-view="settings" aria-labelledby="settings-title" hidden>
+          <header class="page-header">
+            <div class="page-header__text">
+              <p class="eyebrow">Preferences</p>
+              <h1 id="settings-title" tabindex="-1">Settings</h1>
+              <p class="page-sub">Changes are saved automatically in this browser.</p>
+            </div>
+          </header>
+
+          <section class="card settings" aria-label="Preferences">
+            <div class="setting">
+              <div class="setting__text">
+                <label class="setting__title" for="setting-name">Display name</label>
+                <p class="setting__desc">Used in your dashboard greeting. Optional.</p>
+              </div>
+              <div class="setting__control">
+                <input type="text" id="setting-name" maxlength="40" autocomplete="off" placeholder="Your first name">
+              </div>
+            </div>
+
+            <fieldset class="setting">
+              <legend class="setting__text">
+                <span class="setting__title">Theme</span>
+                <span class="setting__desc">Choose how ROUTIQ looks.</span>
+              </legend>
+              <div class="setting__control segmented">
+                <label class="segmented__option"><input type="radio" name="theme" value="light"><span>Light</span></label>
+                <label class="segmented__option"><input type="radio" name="theme" value="dark"><span>Dark</span></label>
+                <label class="segmented__option"><input type="radio" name="theme" value="system"><span>System</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="setting">
+              <legend class="setting__text">
+                <span class="setting__title">Time format</span>
+                <span class="setting__desc">How times are displayed across the app.</span>
+              </legend>
+              <div class="setting__control segmented">
+                <label class="segmented__option"><input type="radio" name="timeFormat" value="12"><span>12-hour</span></label>
+                <label class="segmented__option"><input type="radio" name="timeFormat" value="24"><span>24-hour</span></label>
+              </div>
+            </fieldset>
+
+            <div class="setting setting--danger">
+              <div class="setting__text">
+                <p class="setting__title">Clear application data</p>
+                <p class="setting__desc">Permanently deletes all tasks, habits, history, and settings stored in this browser.</p>
+              </div>
+              <div class="setting__control">
+                <button type="button" class="btn btn--danger-outline" data-action="clear-data">Clear data</button>
+              </div>
+            </div>
+          </section>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Task dialog -->
+  <dialog class="dialog" id="task-dialog" aria-labelledby="task-dialog-title">
+    <form id="task-form" novalidate>
+      <div class="dialog__head">
+        <h2 id="task-dialog-title">Add task</h2>
+        <button type="button" class="icon-btn" data-action="close-dialog" aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <div class="dialog__body">
+        <div class="field">
+          <label for="task-title">Title</label>
+          <input type="text" id="task-title" maxlength="80" autocomplete="off" placeholder="What do you need to do?" aria-describedby="task-title-error" required>
+          <p class="field__error" id="task-title-error"></p>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="task-date">Date</label>
+            <input type="date" id="task-date" aria-describedby="task-date-error" required>
+            <p class="field__error" id="task-date-error"></p>
+          </div>
+          <div class="field">
+            <label for="task-time">Start time</label>
+            <input type="time" id="task-time" aria-describedby="task-time-error" required>
+            <p class="field__error" id="task-time-error"></p>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="task-duration">Duration (minutes)</label>
+            <input type="number" id="task-duration" min="1" max="1440" step="1" inputmode="numeric" aria-describedby="task-duration-error" required>
+            <p class="field__error" id="task-duration-error"></p>
+          </div>
+          <div class="field">
+            <label for="task-category">Category</label>
+            <select id="task-category"></select>
+          </div>
+        </div>
+      </div>
+      <div class="dialog__foot">
+        <button type="button" class="btn btn--secondary" data-action="close-dialog">Cancel</button>
+        <button type="submit" class="btn btn--primary" id="task-submit">Add task</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Confirmation dialog -->
+  <dialog class="dialog dialog--small" id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+    <form method="dialog">
+      <div class="dialog__body dialog__body--confirm">
+        <h2 id="confirm-title">Are you sure?</h2>
+        <p id="confirm-message"></p>
+      </div>
+      <div class="dialog__foot">
+        <button type="submit" class="btn btn--secondary" value="cancel" autofocus>Cancel</button>
+        <button type="submit" class="btn btn--danger" id="confirm-accept" value="confirm">Delete</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+</body>
+</html>
